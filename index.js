@@ -4,7 +4,7 @@ function runMerge (mergeType, destination, key, value) {
     const keyIsUndefined = key === undefined
     const newDestination = keyIsUndefined ? destination : destination[key]
     const newDestinationIsArray = Array.isArray(newDestination)
-    const areObjects = typeof destination === 'object' &&
+    const areObjects = typeof newDestination === 'object' &&
                        typeof value === 'object'
     if (valueIsArray && newDestinationIsArray && mergeType === 'add') {
       if (keyIsUndefined) {

@@ -31,10 +31,10 @@ test('nested Arrays get replaced when mergeType is "replace"', t => {
 })
 
 test('nested Objects get merged', t => {
-  const general = { screwdriver: 'Phillips-Head' }
+  const general = { screwdriver: { type: 'Phillips-Head' } }
   const auto = { safety: ['Welding Gloves'] }
-  const obj1 = { id: 'a', tools: { auto: ['Lift'], general } }
-  const obj2 = { id: 'b', tools: { auto: ['Pressure Gauge'] } }
+  const obj1 = { id: 'a', tools: { auto: ['Lift'] } }
+  const obj2 = { id: 'b', tools: { auto: ['Pressure Gauge'], general } }
   const obj3 = { id: 'c', tools: { auto } }
   t.deepEqual(merge(obj1, obj2, obj3), { id: 'c', tools: { auto, general } })
 })
