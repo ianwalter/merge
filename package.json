@@ -2,9 +2,6 @@
   "name": "@ianwalter/merge",
   "description": "Recursively merge JavaScript objects",
   "version": "0.0.0",
-  "main": "dist/merge.js",
-  "module": "dist/merge.m.js",
-  "iife": "dist/merge.iife.js",
   "license": "SEE LICENSE IN LICENSE",
   "repository": {
     "type": "git",
@@ -22,11 +19,17 @@
     "url": "https://github.com/ianwalter/merge/issues"
   },
   "homepage": "https://github.com/ianwalter/merge#readme",
+  "main": "dist/merge.js",
+  "module": "dist/merge.m.js",
+  "iife": "dist/merge.iife.js",
   "scripts": {
     "lint": "eslint index.js test.js",
     "pretest": "dist --babel",
     "test": "ava"
   },
+  "files": [
+    "dist"
+  ],
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.2.0",
     "@babel/preset-env": "^7.2.3",
