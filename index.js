@@ -1,7 +1,8 @@
 function runMerge (mergeType, items, dest, key, value) {
   if (value !== undefined) {
     const isArray = Array.isArray(value)
-    if (isArray && mergeType === 'add') {
+    const destIsArray = Array.isArray(dest[key])
+    if (isArray && destIsArray && mergeType === 'add') {
       if (key === undefined) {
         dest.unshift(...value)
       } else {
