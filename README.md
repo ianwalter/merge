@@ -38,9 +38,9 @@ add [@ianwalter/clone][cloneUrl] and clone the first item beforehand, e.g.
 `merge(mergeType, item1, item2[, item3...]`
 
 * **mergeType** - A `string` describing how to merge nested Arrays
-  * `replace` - (default) Replace the source array with the new Array
+  * `add` - (default) Add new items into the source Array
+  * `replace` - Replace the source array with the new Array
   * `merge` - Attempt to merge Array items by index
-  * `add` - Add new items into the source Array
 
 ## License
 
