@@ -1,10 +1,27 @@
 {
   "name": "@ianwalter/merge",
   "description": "Recursively merge JavaScript objects",
+  "version": "0.0.0",
   "main": "dist/merge.js",
   "module": "dist/merge.m.js",
   "iife": "dist/merge.iife.js",
   "license": "SEE LICENSE IN LICENSE",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ianwalter/merge.git"
+  },
+  "keywords": [
+    "merge",
+    "object",
+    "array",
+    "assign",
+    "recursive"
+  ],
+  "author": "Ian Walter <public@iankwalter.com> (https://iankwalter.com)",
+  "bugs": {
+    "url": "https://github.com/ianwalter/merge/issues"
+  },
+  "homepage": "https://github.com/ianwalter/merge#readme",
   "scripts": {
     "lint": "eslint index.js test.js",
     "pretest": "dist --babel",

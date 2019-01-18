@@ -54,3 +54,4 @@ Created by [Ian Walter](https://iankwalter.com)
 [npmUrl]: https://www.npmjs.com/package/@ianwalter/merge
 [cloneUrl]: https://github.com/ianwalter/clone
 [deepmergeUrl]: https://github.com/TehShrike/deepmerge
+[licenseUrl]: https://github.com/ianwalter/merge/blob/master/LICENSE
