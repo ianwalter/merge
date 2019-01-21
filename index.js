@@ -4,19 +4,18 @@ function runMerge (mergeType, destination, key, value) {
     const keyIsUndefined = key === undefined
     const newDestination = keyIsUndefined ? destination : destination[key]
     const newDestinationIsArray = Array.isArray(newDestination)
-    const areObjects = typeof newDestination === 'object' &&
-                       typeof value === 'object'
+    const areObjects = newDestination &&
+      value &&
+      typeof newDestination === 'object' &&
+      typeof value === 'object'
+    const areNotArrays = !valueIsArray && !newDestinationIsArray
     if (valueIsArray && newDestinationIsArray && mergeType === 'add') {
       if (keyIsUndefined) {
         newDestination.push.apply(newDestination, value)
       } else {
         destination[key] = newDestination.concat(value)
       }
-    } else if (valueIsArray && newDestinationIsArray && mergeType === 'merge') {
-      value.forEach((value, index) =>
-        runMerge(mergeType, newDestination, index, value)
-      )
-    } else if (areObjects && !valueIsArray && !newDestinationIsArray) {
+    } else if (areObjects && (areNotArrays || mergeType === 'merge')) {
       Object.keys(value).forEach(newKey =>
         runMerge(mergeType, newDestination, newKey, value[newKey])
       )

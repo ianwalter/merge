@@ -59,3 +59,9 @@ test('Arrays in nested Arrays are merged when mergeType is "merge"', t => {
   const obj3 = { id: 2, items: [[ size ]] }
   t.deepEqual(merge('merge', obj1, obj2, obj3), obj3)
 })
+
+test('null values are not treated as objects', t => {
+  const obj1 = { id: 'a', tools: { auto: { safety: ['Welding Gloves'] } } }
+  const obj2 = { id: 'b', tools: { auto: null } }
+  t.deepEqual(merge(obj1, obj2), obj2)
+})
