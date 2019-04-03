@@ -29,3 +29,15 @@ test('null values are not treated as objects', t => {
   const obj2 = { id: 'b', tools: { auto: null } }
   t.deepEqual(merge(obj1, obj2), obj2)
 })
+
+test('prototype properties get merged', t => {
+  const obj1 = { run: () => 'RUN', log: () => 'LOG' }
+  Object.setPrototypeOf(obj1, { dog: () => 'DOG' })
+  const obj2 = { run: v => `RUN: ${v}` }
+  Object.setPrototypeOf(obj2, { fog: () => 'FOG' })
+  const obj3 = merge({}, obj1, obj2)
+  t.is(obj3.run('now'), 'RUN: now')
+  t.is(obj3.log(), 'LOG')
+  t.is(obj3.dog(), 'DOG')
+  t.is(obj3.fog(), 'FOG')
+})

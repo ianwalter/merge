@@ -29,10 +29,17 @@ merge(item1, item2, item3) //=> {
 ## Note
 
 Like `Object.assign`, `merge` will treat the first passed item as the
-"destination" and mutate it. If you want a new "destination" object simply
-add [@ianwalter/clone][cloneUrl] and clone the first argument beforehand, 
-e.g. `merge(clone(item1), item2)`, or just pass an empty object `{}` as the 
-first argument.
+"destination" and mutate it. If you want a new "destination" object simply pass
+an empty object `{}` as the first argument or you can always use
+[@ianwalter/clone][cloneUrl] and clone the first argument beforehand. `merge`
+will also merge prototype properties of objects so if you don't want that you
+can also use `clone` to clone your objects before merging them since, with the
+default options, `clone` does not clone prototype properties.
+
+## Related
+
+* [`@ianwalter/clone`][cloneUrl] - A configurable utility to clone JavaScript
+data (Objects, Arrays, etc)
 
 ## License
 

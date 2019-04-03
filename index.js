@@ -10,9 +10,9 @@ function runMerge (destination, key, value) {
       !Array.isArray(value) &&
       !Array.isArray(newDestination)
     ) {
-      Object.keys(value).forEach(newKey =>
+      for (const newKey in value) {
         runMerge(newDestination, newKey, value[newKey])
-      )
+      }
     } else if (!keyIsUndefined) {
       destination[key] = value
     }
