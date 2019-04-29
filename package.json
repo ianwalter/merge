@@ -22,22 +22,22 @@
   "main": "dist/merge.js",
   "module": "dist/merge.m.js",
   "scripts": {
-    "lint": "eslint index.js test.js",
+    "lint": "eslint index.js tests.js",
     "pretest": "dist --babel",
-    "test": "ava"
+    "test": "bff"
   },
   "files": [
     "dist"
   ],
   "dependencies": {
-    "@babel/runtime": "^7.3.1"
+    "@babel/runtime-corejs3": "^7.4.4"
   },
   "devDependencies": {
-    "@ianwalter/babel-preset-lib": "^1.0.3",
-    "@ianwalter/dist": "^3.0.0",
-    "@ianwalter/eslint-config": "^1.0.0",
-    "ava": "^1.1.0",
-    "np": "^5.0.0"
+    "@ianwalter/babel-preset-lib": "^2.0.1",
+    "@ianwalter/bff": "^4.0.1",
+    "@ianwalter/dist": "^3.1.0",
+    "@ianwalter/eslint-config": "^1.1.2",
+    "np": "^5.0.1"
   },
   "browserslist": [
     "> 0.5%"
