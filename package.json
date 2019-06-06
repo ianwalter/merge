@@ -30,7 +30,7 @@
     "dist"
   ],
   "dependencies": {
-    "@babel/runtime-corejs3": "^7.4.4"
+    "@babel/runtime-corejs3": "^7.4.5"
   },
   "devDependencies": {
     "@ianwalter/babel-preset-lib": "^2.0.2",
