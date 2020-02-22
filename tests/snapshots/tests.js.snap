@@ -16,12 +16,19 @@ Object {
 exports[`nested Objects get merged 2`] = `
 Object {
   "headers": Object {
-    "content-length": "18",
-    "content-type": "application/json",
     "user-agent": "@ianwalter/requester",
   },
   "logLevel": "info",
   "shouldThrow": true,
   "timeout": 60000,
+}
+`;
+
+exports[`nested Objects get merged 3`] = `
+Object {
+  "headers": Object {
+    "content-length": "18",
+    "content-type": "application/json",
+  },
 }
 `;

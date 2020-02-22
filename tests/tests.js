@@ -1,5 +1,5 @@
 const { test } = require('@ianwalter/bff')
-const merge = require('.')
+const merge = require('..')
 
 test('shallow Objects get merged', ({ expect }) => {
   const obj1 = { count: 1, color: 'green' }
@@ -8,7 +8,7 @@ test('shallow Objects get merged', ({ expect }) => {
   expect(merge(obj1, obj2, obj3)).toStrictEqual({ ...obj1, ...obj2, ...obj3 })
 })
 
-test('nested Objects get merged', ({ expect }) => {
+test('nested Objects get merged', async ({ expect, sleep }) => {
   const obj1 = {
     shouldThrow: true,
     logLevel: 'info',
@@ -26,6 +26,8 @@ test('nested Objects get merged', ({ expect }) => {
   const merged = merge({}, obj1, obj2)
   expect(merged).toMatchSnapshot()
   expect(obj1).toMatchSnapshot()
+  expect(obj2).toMatchSnapshot()
+  await sleep(1000)
 })
 
 test('nested Arrays get replaced', ({ expect }) => {
