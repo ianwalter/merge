@@ -14,7 +14,10 @@
     "assign",
     "recursive"
   ],
-  "author": "Ian Walter <public@iankwalter.com> (https://iankwalter.com)",
+  "author": {
+    "name": "Ian Walter",
+    "url": "https://ianwalter.dev"
+  },
   "bugs": {
     "url": "https://github.com/ianwalter/merge/issues"
   },
