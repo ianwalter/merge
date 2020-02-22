@@ -1,7 +1,7 @@
 {
   "name": "@ianwalter/merge",
   "description": "Recursively merge JavaScript Objects",
-  "version": "6.0.0",
+  "version": "7.0.0",
   "license": "SEE LICENSE IN LICENSE",
   "repository": {
     "type": "git",
