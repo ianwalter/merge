@@ -8,7 +8,7 @@ test('shallow Objects get merged', ({ expect }) => {
   expect(merge(obj1, obj2, obj3)).toStrictEqual({ ...obj1, ...obj2, ...obj3 })
 })
 
-test('nested Objects get merged', async ({ expect, sleep }) => {
+test('nested Objects get merged', async ({ expect }) => {
   const obj1 = {
     shouldThrow: true,
     logLevel: 'info',
@@ -27,7 +27,6 @@ test('nested Objects get merged', async ({ expect, sleep }) => {
   expect(merged).toMatchSnapshot()
   expect(obj1).toMatchSnapshot()
   expect(obj2).toMatchSnapshot()
-  await sleep(1000)
 })
 
 test('nested Arrays get replaced', ({ expect }) => {
@@ -55,12 +54,15 @@ test('prototype properties get merged', ({ expect }) => {
   expect(obj3.fog()).toBe('FOG')
 })
 
-test('non-enumerable properties get merged', ({ expect }) => {
-  const obj1 = { flex: 'Left' }
-  Object.defineProperty(obj1, 'flex', { enumerable: false })
-  const obj2 = { fox: 'Two' }
-  Object.defineProperty(obj2, 'fox', { enumerable: false })
-  const merged = merge({}, obj1, obj2)
-  expect(merged.flex).toBe(obj1.flex)
-  expect(merged.fox).toBe(obj2.fox)
+test('circulars', ({ expect }) => {
+  function Podcast () {
+    this.name = 'Beanicles'
+    this.circular = this
+  }
+  function Episode () {
+    this.episodeName = 'Choo Choo'
+    this.episode = this
+  }
+  const merged = merge({}, new Podcast(), new Episode())
+  expect(merged).toMatchSnapshot()
 })

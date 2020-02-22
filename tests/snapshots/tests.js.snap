@@ -1,5 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`circulars 1`] = `
+Object {
+  "episodeName": "Choo Choo",
+  "name": "Beanicles",
+}
+`;
+
 exports[`nested Objects get merged 1`] = `
 Object {
   "headers": Object {
