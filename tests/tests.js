@@ -54,3 +54,13 @@ test('prototype properties get merged', ({ expect }) => {
   expect(obj3.dog()).toBe('DOG')
   expect(obj3.fog()).toBe('FOG')
 })
+
+test('non-enumerable properties get merged', ({ expect }) => {
+  const obj1 = { flex: 'Left' }
+  Object.defineProperty(obj1, 'flex', { enumerable: false })
+  const obj2 = { fox: 'Two' }
+  Object.defineProperty(obj2, 'fox', { enumerable: false })
+  const merged = merge({}, obj1, obj2)
+  expect(merged.flex).toBe(obj1.flex)
+  expect(merged.fox).toBe(obj2.fox)
+})
