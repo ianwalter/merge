@@ -5,7 +5,8 @@ test('shallow Objects get merged', ({ expect }) => {
   const obj1 = { count: 1, color: 'green' }
   const obj2 = { count: 1, shape: 'triangle' }
   const obj3 = { count: 1, size: 'large' }
-  expect(merge({}, obj1, obj2, obj3)).toStrictEqual({ ...obj1, ...obj2, ...obj3 })
+  expect(merge({}, obj1, obj2, obj3))
+    .toStrictEqual({ ...obj1, ...obj2, ...obj3 })
 })
 
 test('nested Objects get merged', ({ expect }) => {
