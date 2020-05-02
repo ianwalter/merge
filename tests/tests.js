@@ -1,15 +1,15 @@
 const { test } = require('@ianwalter/bff')
 const merge = require('..')
 
-test('shallow Objects get merged', ({ expect }) => {
+test`shallow Objects get merged ${t => {
   const obj1 = { count: 1, color: 'green' }
   const obj2 = { count: 1, shape: 'triangle' }
   const obj3 = { count: 1, size: 'large' }
   const shallow = { ...obj1, ...obj2, ...obj3 }
-  expect(merge(obj1, obj2, obj3)).toStrictEqual(shallow)
-})
+  t.expect(merge(obj1, obj2, obj3)).toStrictEqual(shallow)
+}}`
 
-test('nested Objects get merged', async ({ expect }) => {
+test`nested Objects get merged ${t => {
   const obj1 = {
     shouldThrow: true,
     logLevel: 'info',
@@ -25,37 +25,37 @@ test('nested Objects get merged', async ({ expect }) => {
     }
   }
   const merged = merge({}, obj1, obj2)
-  expect(merged).toMatchSnapshot()
-  expect(obj1).toMatchSnapshot()
-  expect(obj2).toMatchSnapshot()
-})
+  t.expect(merged).toMatchSnapshot()
+  t.expect(obj1).toMatchSnapshot()
+  t.expect(obj2).toMatchSnapshot()
+}}`
 
-test('nested Arrays get replaced', ({ expect }) => {
+test`nested Arrays get replaced ${t => {
   const obj1 = { count: 1, items: [1] }
   const obj2 = { count: 1, items: [2] }
   const obj3 = { count: 1, items: [3] }
-  expect(merge(obj1, obj2, obj3)).toStrictEqual(obj3)
-})
+  t.expect(merge(obj1, obj2, obj3)).toStrictEqual(obj3)
+}}`
 
-test('null values are not treated as objects', ({ expect }) => {
+test`null values are not treated as objects ${t => {
   const obj1 = { id: 'a', tools: { auto: { safety: ['Welding Gloves'] } } }
   const obj2 = { id: 'b', tools: { auto: null } }
-  expect(merge(obj1, obj2)).toStrictEqual(obj2)
-})
+  t.expect(merge(obj1, obj2)).toStrictEqual(obj2)
+}}`
 
-test('prototype properties get merged', ({ expect }) => {
+test`prototype properties get merged ${t => {
   const obj1 = { run: () => 'RUN', log: () => 'LOG' }
   Object.setPrototypeOf(obj1, { dog: () => 'DOG' })
   const obj2 = { run: v => `RUN: ${v}` }
   Object.setPrototypeOf(obj2, { fog: () => 'FOG' })
   const obj3 = merge({}, obj1, obj2)
-  expect(obj3.run('now')).toBe('RUN: now')
-  expect(obj3.log()).toBe('LOG')
-  expect(obj3.dog()).toBe('DOG')
-  expect(obj3.fog()).toBe('FOG')
-})
+  t.expect(obj3.run('now')).toBe('RUN: now')
+  t.expect(obj3.log()).toBe('LOG')
+  t.expect(obj3.dog()).toBe('DOG')
+  t.expect(obj3.fog()).toBe('FOG')
+}}`
 
-test('circulars', ({ expect }) => {
+test`circulars ${t => {
   function Podcast () {
     this.name = 'Beanicles'
     this.circular = this
@@ -65,5 +65,5 @@ test('circulars', ({ expect }) => {
     this.episode = this
   }
   const merged = merge({}, new Podcast(), new Episode())
-  expect(merged).toMatchSnapshot()
-})
+  t.expect(merged).toMatchSnapshot()
+}}`
