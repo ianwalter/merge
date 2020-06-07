@@ -14,7 +14,12 @@ function merge (...items) {
         } else if (isObj(val)) {
           destination[key] = merge.call({ circulars }, isObj(to) ? to : {}, val)
         } else if (val !== undefined) {
-          destination[key] = val
+          const descriptor = Object.getOwnPropertyDescriptor(item, key)
+          if (descriptor) {
+            Object.defineProperty(destination, key, descriptor)
+          } else {
+            destination[key] = val
+          }
         }
       }
     }

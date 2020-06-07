@@ -67,3 +67,23 @@ test('circulars', ({ expect }) => {
   const merged = merge({}, new Podcast(), new Episode())
   expect(merged).toMatchSnapshot()
 })
+
+test('Object with getters', t => {
+  const one = {
+    likeThis: 'always',
+    get line () {
+      return `it's ${this.likeThis} been like this`
+    },
+    get refrain () {
+      return `${this.likeThis} like this`
+    }
+  }
+  const two = {
+    likeThis: 'never',
+    line: 'We can do this every night, you can be my ride or die'
+  }
+  merge(one, two)
+  t.expect(one.likeThis).toBe(two.likeThis)
+  t.expect(one.line).toBe(two.line)
+  t.expect(one.refrain).toBe('never like this')
+})
