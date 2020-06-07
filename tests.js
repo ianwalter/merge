@@ -1,5 +1,5 @@
 const { test } = require('@ianwalter/bff')
-const merge = require('..')
+const merge = require('.')
 
 test('shallow Objects get merged', ({ expect }) => {
   const obj1 = { count: 1, color: 'green' }
