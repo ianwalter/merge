@@ -75,15 +75,16 @@ test('Object with getters', t => {
       return `it's ${this.likeThis} been like this`
     },
     get refrain () {
-      return `${this.likeThis} like this`
+      return { text: `${this.likeThis} like this`, times: 5 }
     }
   }
   const two = {
     likeThis: 'never',
-    line: 'We can do this every night, you can be my ride or die'
+    line: 'We can do this every night, you can be my ride or die',
+    refrain: { times: 4 }
   }
   merge(one, two)
   t.expect(one.likeThis).toBe(two.likeThis)
   t.expect(one.line).toBe(two.line)
-  t.expect(one.refrain).toBe('never like this')
+  t.expect(one.refrain).toEqual({ text: 'never like this', times: 4 })
 })
