@@ -1,26 +1,24 @@
-const isObj = i => typeof i === 'object' && i && !Array.isArray(i)
+const isObj = i => i && typeof i === 'object' && !Array.isArray(i)
 
 function merge (...items) {
   const circulars = (this && this.circulars) || []
   const destination = items.shift()
   for (const item of items) {
-    circulars.push(item)
     if (isObj(item)) {
-      for (const key in item) {
-        const descriptor = Object.getOwnPropertyDescriptor(item, key)
-        const val = item[key]
-        const to = destination[key]
-        if (circulars.includes(val)) {
+      circulars.push(item)
+      const props = Object.entries(Object.getOwnPropertyDescriptors(item))
+      for (const [key, descriptor] of props) {
+        const srcVal = item[key]
+        const destVal = destination[key] || {}
+        if (circulars.includes(srcVal)) {
           continue
-        } else if (isObj(val)) {
-          descriptor.value = merge.call({ circulars }, isObj(to) ? to : {}, val)
+        } else if (isObj(srcVal)) {
+          descriptor.value = merge.call({ circulars }, destVal, srcVal)
+          delete descriptor.get
+          delete descriptor.set
+        }
+        if (srcVal !== undefined) {
           Object.defineProperty(destination, key, descriptor)
-        } else if (val !== undefined) {
-          if (descriptor) {
-            Object.defineProperty(destination, key, descriptor)
-          } else {
-            destination[key] = val
-          }
         }
       }
     }
