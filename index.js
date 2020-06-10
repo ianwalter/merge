@@ -7,7 +7,7 @@ function merge (...items) {
     if (isObj(item)) {
       circulars.push(item)
       const pt = Object.getPrototypeOf(item)
-      const hasProto = pt && Object.keys(pt).length
+      const hasProto = pt && pt !== Object.prototype
       const props = [
         ...Object.entries(Object.getOwnPropertyDescriptors(item)),
         // Merge prototype properties if the prototype has properties, e.g. is
