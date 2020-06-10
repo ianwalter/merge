@@ -43,6 +43,18 @@ test('null values are not treated as objects', ({ expect }) => {
   expect(merge(obj1, obj2)).toStrictEqual(obj2)
 })
 
+test('prototype properties get merged', ({ expect }) => {
+  const obj1 = { run: () => 'RUN', log: () => 'LOG' }
+  Object.setPrototypeOf(obj1, { dog: () => 'DOG' })
+  const obj2 = { run: v => `RUN: ${v}` }
+  Object.setPrototypeOf(obj2, { fog: () => 'FOG' })
+  const obj3 = merge({}, obj1, obj2)
+  expect(obj3.run('now')).toBe('RUN: now')
+  expect(obj3.log()).toBe('LOG')
+  expect(obj3.dog()).toBe('DOG')
+  expect(obj3.fog()).toBe('FOG')
+})
+
 test('circulars', ({ expect }) => {
   function Podcast () {
     this.name = 'Beanicles'

@@ -6,7 +6,14 @@ function merge (...items) {
   for (const item of items) {
     if (isObj(item)) {
       circulars.push(item)
-      const props = Object.entries(Object.getOwnPropertyDescriptors(item))
+      const pt = Object.getPrototypeOf(item)
+      const hasProto = pt && Object.keys(pt).length
+      const props = [
+        ...Object.entries(Object.getOwnPropertyDescriptors(item)),
+        // Merge prototype properties if the prototype has properties, e.g. is
+        // not a POJO.
+        ...hasProto ? Object.entries(Object.getOwnPropertyDescriptors(pt)) : []
+      ]
       for (const [key, descriptor] of props) {
         const srcVal = item[key]
         const destVal = destination[key] || {}
