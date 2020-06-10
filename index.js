@@ -10,8 +10,7 @@ function merge (...items) {
       const hasProto = pt && pt !== Object.prototype
       const props = [
         ...Object.entries(Object.getOwnPropertyDescriptors(item)),
-        // Merge prototype properties if the prototype has properties, e.g. is
-        // not a POJO.
+        // Merge Object's prototype properties if the Object is not a POJO.
         ...hasProto ? Object.entries(Object.getOwnPropertyDescriptors(pt)) : []
       ]
       for (const [key, descriptor] of props) {
