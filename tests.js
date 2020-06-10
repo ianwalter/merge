@@ -43,18 +43,6 @@ test('null values are not treated as objects', ({ expect }) => {
   expect(merge(obj1, obj2)).toStrictEqual(obj2)
 })
 
-test('prototype properties get merged', ({ expect }) => {
-  const obj1 = { run: () => 'RUN', log: () => 'LOG' }
-  Object.setPrototypeOf(obj1, { dog: () => 'DOG' })
-  const obj2 = { run: v => `RUN: ${v}` }
-  Object.setPrototypeOf(obj2, { fog: () => 'FOG' })
-  const obj3 = merge({}, obj1, obj2)
-  expect(obj3.run('now')).toBe('RUN: now')
-  expect(obj3.log()).toBe('LOG')
-  expect(obj3.dog()).toBe('DOG')
-  expect(obj3.fog()).toBe('FOG')
-})
-
 test('circulars', ({ expect }) => {
   function Podcast () {
     this.name = 'Beanicles'
@@ -81,10 +69,15 @@ test('Object with getters', t => {
   const two = {
     likeThis: 'never',
     line: 'We can do this every night, you can be my ride or die',
-    refrain: { times: 4 }
+    refrain: { times: 4 },
+    get time () {
+      const length = (this.refrain.text && this.refrain.text.length) || 0
+      return length * this.refrain.times
+    }
   }
   merge(one, two)
   t.expect(one.likeThis).toBe(two.likeThis)
   t.expect(one.line).toBe(two.line)
   t.expect(one.refrain).toEqual({ text: 'never like this', times: 4 })
+  t.expect(one.time).toBe(60)
 })
